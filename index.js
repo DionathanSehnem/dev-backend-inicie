@@ -1,64 +1,123 @@
+// - [ ] Criar um novo comentário dentro do primeiro post da lista pública de posts;
+// - [ ] Apagar o comentário criado no requisito acima;
+// - [ ] Criar uma função para substituir os requests, um para get e outro para post;
+
 const axios = require("axios");
 require('dotenv').config();
 
+let r = (Math.random() + 1).toString(36).substring(5);
+
 const USER_DATA = {
-    "name": "Elvis Elvino",
-    "email": "elvinho@gmail.com",
+    "name": `${r}`,
+    "email": `${r}@${r}.com`, //`${r}@${r}.com`,
     "gender": "male",
     "status": "active"
 }
 
+main();
+
+async function main() {
+    const userID = await createNewUser();
+    console.log("UserID: " + userID);
+    const userData = await getUserByID(userID);
+    console.log({ user: userData });
+    const postID = await createNewPost(userID);
+    console.log("PostID: " + postID);
+    await createNewComment(postID, userData);
+    await createCommentOnFirstPost(userData);
+}
+
 async function createNewUser() {
-    await axios.post(
-            "https://gorest.co.in/public/v1/users", USER_DATA, {
+    try {
+        const { data } = await axios.post(
+            "https://gorest.co.in/public/v2/users", USER_DATA, {
                 headers: {
                     Authorization: "Bearer " + process.env.TOKEN,
                 },
             }
-        ).then(({ data }) => {
-            const userId = data.data.id;
-            console.log(userId);
-            return userId;
-        })
-        .catch(err => {
-            console.log(err.response.data.data);
-        });
+        );
+        userID = data.id;
+        return userID;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-async function getAllUsers() {
+async function getUserByID(userID) {
     try {
         const { data } = await axios.get(
-            "https://gorest.co.in/public/v1/users", {
+            "https://gorest.co.in/public/v2/users", {
                 headers: {
                     Authorization: `Bearer ${process.env.TOKEN}`,
                 },
             }
         );
-        console.log(data);
+        let userData;
+        data.forEach(user => {
+            if (userID == user.id) {
+                userData = user;
+            }
+        });
+        return userData;
     } catch (error) {
         console.log(error);
     }
 }
 
-
-async function deleteUser() {
+async function createNewPost(userID) {
     try {
         const { data } = await axios.post(
-            "https://gorest.co.in/public/v1/users", {
-                "name": "Elvis Elvino",
-                "email": "elvis@gmail.comm",
-                "gender": "male",
-                "status": "active"
+            "https://gorest.co.in/public/v2/posts", {
+                user_id: userID,
+                title: `${r.toUpperCase()}`,
+                body: `${r} ${r} ${r}`
             }, {
                 headers: {
-                    Authorization: 'Bearer bb34b7cf29ddcfb3f4bf1fd0e1f8947fa15b41b6fabf22a2f4b318a5119b6b5d',
+                    Authorization: "Bearer " + process.env.TOKEN,
+                },
+            }
+        );
+        return data.id;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function createNewComment(postID, user) {
+    try {
+        const { data } = await axios.post(
+            "https://gorest.co.in/public/v2/comments", {
+                post_id: postID,
+                name: user.name,
+                email: user.email,
+                body: `${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} `
+            }, {
+                headers: {
+                    Authorization: "Bearer " + process.env.TOKEN,
                 },
             }
         );
         console.log(data);
+        return data.id;
     } catch (error) {
         console.log(error);
     }
 }
 
-console.log(createNewUser());
+async function createCommentOnFirstPost(user) {
+    try {
+        const { data } = await axios.get(
+            "https://gorest.co.in/public/v2/posts", {
+                headers: {
+                    Authorization: `Bearer ${process.env.TOKEN}`,
+                },
+            }
+        );
+        console.log("1º Post ID: " + data[0].id)
+        const commentID = await createNewComment(data[0].id, user);
+        console.log("ID do comentário: " + commentID);
+        return commentID;
+    } catch (error) {
+        console.log(error);
+    }
+}
