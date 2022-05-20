@@ -5,18 +5,18 @@
 - [x] Listar todos os usuários da API e encontrar o usuário criado através do ID do mesmo (o ID será retornado na operação de criação);
 - [x] Criar um novo post para o usuário criado;
 - [x] Criar um novo comentário dentro do post criado;
-- [ ] Criar um novo comentário dentro do primeiro post da lista pública de posts;
-- [ ] Apagar o comentário criado no requisito acima;
+- [x] Criar um novo comentário dentro do primeiro post da lista pública de posts;
+- [x] Apagar o comentário criado no requisito acima;
 - [ ] Disponibilizar o projeto em um repositório do Git com as instruções para que a equipe de avaliação consiga executar;
 
 #### Pontos Avaliados:
 
 - [x] Utilizar Node.Js ou Laravel
 - [x] Utilizar a Api da [GoRest](https://gorest.co.in/)
-- [ ] Concluir todos os 7 requisitos
+- [x] Concluir todos os 7 requisitos
 - [ ] Fazer um código eficiente
 - [ ] Fazer um código com qualidade
-- [ ] Ter uma boa estrutura de código
+- [x] Ter uma boa estrutura de código
 - [ ] Fazer testes automatizados
 - [ ] Utilizar Docker
 - [ ] Criar uma documentação do projeto
