@@ -14,10 +14,10 @@
 - [x] Utilizar Node.Js ou Laravel
 - [x] Utilizar a Api da [GoRest](https://gorest.co.in/)
 - [x] Concluir todos os 7 requisitos
-- [ ] Fazer um código eficiente
-- [ ] Fazer um código com qualidade
+- [x] Fazer um código eficiente
+- [x] Fazer um código com qualidade
 - [x] Ter uma boa estrutura de código
-- [ ] Fazer testes automatizados
-- [ ] Utilizar Docker
+- [x] Fazer testes automatizados
+- [x] Utilizar Docker
 - [ ] Criar uma documentação do projeto
-- [ ] Criar Features Extras
+- [x] Criar Features Extras

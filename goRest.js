@@ -21,10 +21,9 @@ module.exports = {
         try {
             const { data } = await axios.post(
                 "https://gorest.co.in/public/v2/users", USER_DATA, CONFIG_REQUEST);
-            console.log(`ID of Created User: ${data.id}`)
             return data.id;
         } catch (error) {
-            console.log(error);
+            return error.response.data[0];
         }
     },
 
@@ -38,7 +37,6 @@ module.exports = {
                     userData = user;
                 }
             });
-            console.log(`ID of Found User: ${userData.id}`);
             return userData;
         } catch (error) {
             console.log(error);
@@ -53,7 +51,6 @@ module.exports = {
                     title: `${r.toUpperCase()}`,
                     body: `${r} ${r} ${r}`
                 }, CONFIG_REQUEST);
-            console.log(`ID of Created Post: ${data.id}`);
             return data.id;
         } catch (error) {
             console.log(error);
@@ -69,7 +66,6 @@ module.exports = {
                     email: user.email,
                     body: `${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} `
                 }, CONFIG_REQUEST);
-            console.log(`ID of Created Comment: ${data.id}`);
             return data.id;
         } catch (error) {
             console.log(error);
@@ -81,8 +77,6 @@ module.exports = {
             const { data } = await axios.get(
                 "https://gorest.co.in/public/v2/posts", CONFIG_REQUEST);
             const commentID = await this.createNewComment(data[0].id, user);
-            console.log(`ID of First Post: ${data[0].id}`)
-            console.log(`ID of Created Comment on First Post: ${commentID}`);
             return commentID;
         } catch (error) {
             console.log(error);
@@ -93,7 +87,7 @@ module.exports = {
         try {
             const { data } = await axios.delete(
                 `https://gorest.co.in/public/v2/comments/${commentID}`, CONFIG_REQUEST);
-            console.log(`The comment with id ${commentID} was successfully deleted!`)
+            return commentID;
         } catch (error) {
             console.log(error.response.data);
         }
