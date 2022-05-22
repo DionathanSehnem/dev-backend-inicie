@@ -7,7 +7,7 @@
 - [x] Criar um novo comentário dentro do post criado;
 - [x] Criar um novo comentário dentro do primeiro post da lista pública de posts;
 - [x] Apagar o comentário criado no requisito acima;
-- [ ] Disponibilizar o projeto em um repositório do Git com as instruções para que a equipe de avaliação consiga executar;
+- [x] Disponibilizar o projeto em um repositório do Git com as instruções para que a equipe de avaliação consiga executar;
 
 #### Pontos Avaliados:
 
