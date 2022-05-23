@@ -7,20 +7,11 @@ const CONFIG_REQUEST = {
     },
 }
 
-//temporary code
-let r = (Math.random() + 1).toString(36).substring(5);
-const USER_DATA = {
-    "name": `${r}`,
-    "email": `${r}@${r}.com`, //`${r}@${r}.com`,
-    "gender": "male",
-    "status": "active"
-}
-
 module.exports = {
-    createNewUser: async function() {
+    createNewUser: async function(userData) {
         try {
             const { data } = await axios.post(
-                "https://gorest.co.in/public/v2/users", USER_DATA, CONFIG_REQUEST);
+                "https://gorest.co.in/public/v2/users", userData, CONFIG_REQUEST);
             return data.id;
         } catch (error) {
             return error.response.data[0];

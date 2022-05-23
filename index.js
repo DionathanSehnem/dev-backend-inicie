@@ -4,7 +4,15 @@ main();
 
 async function main() {
 
-    const userID = await GoRest.createNewUser();
+    let r = (Math.random() + 1).toString(36).substring(5);
+    const USER_DATA = {
+        "name": `${r}`,
+        "email": `${r}@${r}.com`, //`${r}@${r}.com`,
+        "gender": "male",
+        "status": "active"
+    }
+
+    const userID = await GoRest.createNewUser(USER_DATA);
     console.log(`ID of Created User: ${userID}`)
     const userData = await GoRest.getUserByID(userID);
     console.log(`ID of Found User: ${userData.id}`);
