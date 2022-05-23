@@ -1,23 +1,36 @@
-### Requisitos
-##### Realizar o consumo da API para fazer os seguintes procedimentos:
+# api-library
 
-- [x] Criar um novo usuário dentro do sistema (não utilizar nomes reais);
-- [x] Listar todos os usuários da API e encontrar o usuário criado através do ID do mesmo (o ID será retornado na operação de criação);
-- [x] Criar um novo post para o usuário criado;
-- [x] Criar um novo comentário dentro do post criado;
-- [x] Criar um novo comentário dentro do primeiro post da lista pública de posts;
-- [x] Apagar o comentário criado no requisito acima;
-- [x] Disponibilizar o projeto em um repositório do Git com as instruções para que a equipe de avaliação consiga executar;
+Este projeto foi desenvolvido usando Javascript, Axios, Docker e Github Actions.
 
-#### Pontos Avaliados:
+## Configuração Inicial
 
-- [x] Utilizar Node.Js ou Laravel
-- [x] Utilizar a Api da [GoRest](https://gorest.co.in/)
-- [x] Concluir todos os 7 requisitos
-- [x] Fazer um código eficiente
-- [x] Fazer um código com qualidade
-- [x] Ter uma boa estrutura de código
-- [x] Fazer testes automatizados
-- [x] Utilizar Docker
-- [ ] Criar uma documentação do projeto
-- [x] Criar Features Extras
+Para baixar o container do projeto, acesse a área de [packages]('https://github.com/DionathanSehnem/dev-backend-inicie/pkgs/container/dev-backend-inicie') deste respositorio, e siga as instruções para baixar.
+
+## Executando o container
+
+Para executar o container você irá usar o seguinte código no terminal: 
+
+```bash
+docker run -e TOKEN={SEU TOKEN DO GOREST} -it {IMAGE ID}
+```
+Um exemplo abaixo de como ficaria o comando:
+
+```bash
+docker run -e TOKEN=1234 -it 1234
+```
+
+## Executando a aplicação
+
+
+Para executar a aplicação normalmente:
+```bash
+npm start
+```
+Para executar os testes da aplicação:
+```bash
+npm test
+```
+
+### Observações
+
+Foi utilizado o Github Actions, para que quando houver um novo commit no respositorio, ele automaticante crie um novo container Docker com as novas modificações do código.
