@@ -34,13 +34,13 @@ module.exports = {
         }
     },
 
-    createNewPost: async function(userID) {
+    createNewPost: async function(userID, post) {
         try {
             const { data } = await axios.post(
                 "https://gorest.co.in/public/v2/posts", {
                     user_id: userID,
-                    title: `${r.toUpperCase()}`,
-                    body: `${r} ${r} ${r}`
+                    title: post.title,
+                    body: post.body
                 }, CONFIG_REQUEST);
             return data.id;
         } catch (error) {
@@ -48,14 +48,14 @@ module.exports = {
         }
     },
 
-    createNewComment: async function(postID, user) {
+    createNewComment: async function(postID, user, body) {
         try {
             const { data } = await axios.post(
                 "https://gorest.co.in/public/v2/comments", {
                     post_id: postID,
                     name: user.name,
                     email: user.email,
-                    body: `${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} ${r.toUpperCase()} ${r} `
+                    body: body,
                 }, CONFIG_REQUEST);
             return data.id;
         } catch (error) {
@@ -63,11 +63,11 @@ module.exports = {
         }
     },
 
-    createCommentOnFirstPost: async function(user) {
+    createCommentOnFirstPost: async function(user, body) {
         try {
             const { data } = await axios.get(
                 "https://gorest.co.in/public/v2/posts", CONFIG_REQUEST);
-            const commentID = await this.createNewComment(data[0].id, user);
+            const commentID = await this.createNewComment(data[0].id, user, body);
             return commentID;
         } catch (error) {
             console.log(error);
